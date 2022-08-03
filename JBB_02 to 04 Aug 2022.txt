@@ -1,0 +1,302 @@
+Java Beyond Basics
+
+******************************************Date: 02-08-2022***********************************************
+
+Java Fundamentals:
+- data types
+- operators
+- statements
+- class and objects
+- OOP
+- Strings
+- Arrays
+- Exception
+- Enum
+- Access modifiers
+- Abstract class
+- Interface
+- Date & Time
+- Type casting
+- package
+- Inheritance
+- Polymorphism
+- Generics
+- Varargs
+- final, super
+- static
+- Java Library
+- Collections
+
+
+
+
+Array of objects:
+
+class DemoClass{
+int x;
+int y;
+
+Setters
+Getters
+}
+
+main (){
+DemoClass array[] = new DemoClass[3];
+
+
+array[0] = new DemoClass();
+array[0].x=10;
+array[0].y=20;
+
+
+Method Overloading:
+
+void test(int x, int y){};
+void test(float y, int x){};
+void test(int x, float y){};
+void test(){};
+
+
+Method Overriding:
+class ParentClass{
+void test(){      //Overriden
+print("Welcome");}
+}
+
+class ChildClass extends ParentClass{
+
+@Override
+void test(){    //Overriding
+print("Hello");}
+}
+
+Varargs:
+
+void test(float y, int...n )
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Annotations:
+- It is an additional information given to compiler or JVM.
+- @ symbol
+
+[1]. Built-in annotations:
+	1. @Override:
+	            This annotation is provided before writing overriding method.
+				class ParentClass{
+				void test(){      //Overriden
+					print("Welcome");}
+				}
+
+				class ChildClass extends ParentClass{
+
+				@Override
+				void test(){    //Overriding
+					print("Hello");}
+						}
+				
+				
+	2. @Deprecated:
+	      
+	
+	3. @SuppressWarnings:
+	
+	4. @SafeVarargs:
+	
+	
+
+[2]. User-defined annotations (Custom Annotation):
+
+      @interface MyAnnotation
+	  {
+	  String value1();
+	  int value2();
+	  float value3() default 3.4f;
+	  	  }
+	  
+	  Rules for methods:
+	  1. Methods should not have any throws clause
+	  2. No parameter
+	  3. Method should return primitive type value/string/class/enum  or array of these
+	  
+	  
+	  Types:
+	  1. Marker Annotation: no methods       e.g. @Override
+	  2. Single-valued Annotation: one method
+	  3. Multi-valued Annotation: more than one methods
+	  
+	  @Inherited
+	  @MyAnnotation(value1="Vishal", value2=5; value3=4.5)
+	  void test(){
+	  ---
+	  ---
+	  }
+	  
+
+[3]. Built-in annotations used with another annotations:
+
+     1. @Target:  
+				- To specify the taget where we want to apply the annotation
+				- ElementType.------
+				
+				TYPE : 	class, interface, enumeration
+				METHOD: method
+				CONSTRUCTOR: costructor
+				FIELD: field
+				LOCAL_VARIABLE: local variable
+				
+	2. @Retention:
+	         - To what level (source code or compile time or run time) we want to make this annotation available
+			 - @Retention(RetentionPolicy.------)
+			 SOURCE: source code only, not vailable at compile and run time
+			 CLASS: compile time, not at run-time
+			 RUNTIME: run-time
+			 
+	 3. @Inherited:
+	      -- If we want to make the annotation used for parent class, available to child class also
+		  
+	 4. @Documented:
+	 -- If we want to include the annotation in docuemntation of a project
+--------------------------------------------------------------------------------------------------------------------------------
+
+File System:
+
+Byte Stream: raw type data/binary data e.g. image, video, media files
+
+   Write operation ---> OutputStream class (abstract) --> FileOutputStream, DataOutputStream, BufferedOutputStream, ObjectOutputStream --> write(int), write(byte[]), close()
+   Read operation ---> InputStream class (abstract) ---> FileInputStream, DataInputStream, BufferedInputStream, ObjectInputStream --> read(), available(), close()
+
+Character Stream: unicode characters   
+
+	Write operation ---> Writer class (abstract)  --->
+	Read operation ---> Reader class (abstract)
+	
+----------------------------------------------------------------------------------------------------------------------------------------
+
+*********************************** Date: 03-08-2022 **************************************
+
+Serialization:
+
+- Serialization is the process of converting object into byte stream.
+   ObjectOutputStream class ---> WriteObject()
+   
+- De-serialization is the process of converting byte stream into object.
+  ObjectInputStream class ---> ReadObject()
+  
+ - Must implement Serializable interface
+ 
+ - IS-A relationship: If a parent class is serializable, then all its child classes are also serializable by default, no need to explicitly implement Serializable interface by child classes
+ 
+ - Has-A relationship: 
+   If a class to be serialized is having a reference of another class, then that another class should also be serializable
+   
+ - 'transient' keyword: If we dont want to serialize a specific member, then declare such member with 'transient' keyword 
+ -------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ Cloning:
+ 
+ [1]. Shallow Cloning:
+ 
+ 
+ [2]. Deep Cloning:
+ 
+ ---------------------------------------------------------------------------------------------------
+ 
+ JDBC API:
+ 
+ 1. Load amd Register a driver
+ 
+ 2. Establish a connection between JAVA application and Database
+ 
+ 3. Create a statement object
+ 
+ 4. Send and execute the query
+ 
+ 5. Process the ResultSet object which is returned
+
+ 6. Close connection and statement.
+ --------------------------------------------------------------------------------------------------------
+ 
+ Functional Interface:
+ 
+  - It is an interface having single abstract method.
+  -
+  @FunctionalInterface
+  interface DemoClass{
+  --
+  ---
+  }
+  
+ 
+ Lambda Expression:
+ 
+ void test(){
+ print("Hello");
+ }
+ 
+ ===> 
+ () -> print("Hello"); 
+ 
+ 
+  
+  void test(){
+ print("Hello");
+ print("Welcome");
+ }
+ 
+ ===> 
+ () -> {print("Hello"); print("Welcome");}
+
+
+int test(){
+ print("Hello");
+return(10);
+ }
+ 
+ ===> 
+ () -> {print("Hello"); return(10);}
+ 
+ 
+ int test(){
+ return(10);
+ }
+ 
+ ===> 
+ () -> 10;
+ 
+ 
+  int test(int x, int y){
+ return(x+y);
+ }
+ ===> 
+ (x,y) -> x+y;
+ 
+ Types of functional interfaces:
+ 
+ 1. Consumer Interface: Accepts--> one argument,  Returns--> no value
+                     Method: accept()
+				   Extended Versions: 
+				    - BiConsumer: Accepts--> two arguments,  Returns--> no value
+				    - IntConsumer, LongConsumer, DoubleConsumer
+    
+	 
+ 2. Predicate Interface: Accepts--> one argument,  Returns--> one boolean value
+       Method: test()
+	   Extended Versions: BiPredicate
+	                                  - IntPredicate, DoublePredicate, and LongPredicate
+	   
+ 3. Function Interface: Accepts--> one argument,  Returns--> one  value
+        Method: apply()
+        Extended Versions: BiFunction
+		                  -IntFunction, LongFunction, DoubleFunction
+		
+		                 - UnaryOperator:  extended from Function ---> accpets one values and returns one value ---> all accepted and return value are of same datatype
+		                 - BinaryOperator: extended from BiFunction ---> accpets two values and returns one value ---> all accepted and return value are of same datatype
+		
+		
+		
+ 4. Supplier Interface: Accepts--> No argument,  Returns--> one  value
+    Method: get()
+	
+	Extended Versions: BooleanSupplier, DoubleSupplier, LongSupplier, and IntSupplier
+	
+---------------------------------------------------------------------------------------------------------
